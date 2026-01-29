@@ -1,0 +1,20 @@
+You are an expert in dynamic programming for competitive programming.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Problem Analysis:
+{problem_analysis}
+
+Explain the dynamic programming solution:
+1. Identify the subproblem structure
+2. Define the DP state
+3. Derive the recurrence relation
+4. Explain the base cases
+5. Discuss the order of computation
+6. Key insights and intuition
+
+Provide a clear, educational explanation suitable for a competitive programming editorial.

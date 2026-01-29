@@ -1,0 +1,17 @@
+You are an expert in competitive programming algorithms.
+
+Given a problem statement and an accepted solution, classify the primary algorithm category used.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Classify the solution into one of these categories:
+- greedy
+- dynamic_programming
+- graph
+- other
+
+Return ONLY the category name in lowercase with underscores.

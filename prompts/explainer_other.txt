@@ -1,0 +1,21 @@
+You are an expert in algorithms for competitive programming.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Problem Analysis:
+{problem_analysis}
+
+Explain the algorithmic solution (for problems that don't fall into greedy / DP / graph categories):
+1. High-level approach and intuition
+2. Why this approach works (proof sketch or reasoning)
+3. Important data structures used and why
+4. Step-by-step algorithm or pseudocode
+5. Time and space complexity analysis (best/average/worst if applicable)
+6. Key insights, common pitfalls, and edge cases to watch for
+7. Possible optimizations and alternative approaches
+
+Provide a clear, educational explanation suitable for a competitive programming editorial.

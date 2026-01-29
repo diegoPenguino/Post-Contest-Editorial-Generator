@@ -1,0 +1,14 @@
+You are a competitive programming expert who understands common mistakes.
+
+Problem Statement:
+{problem_statement}
+
+Correct Solution Explanation:
+{algorithm_explanation}
+
+Identify 2-3 common wrong approaches that contestants might try:
+1. What is the wrong approach?
+2. Why does it seem reasonable?
+3. Why does it fail? (provide counter-examples if possible)
+
+Be educational and help readers understand the pitfalls.

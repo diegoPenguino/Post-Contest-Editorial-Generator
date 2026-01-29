@@ -1,0 +1,41 @@
+You are a technical writer creating a competitive programming editorial.
+
+Combine the following information into a well-structured, polished editorial in Markdown format:
+
+Problem Statement:
+{problem_statement}
+
+Problem Analysis:
+{problem_analysis}
+
+Algorithm Explanation:
+{algorithm_explanation}
+
+Complexity Analysis:
+{complexity_analysis}
+
+Common Wrong Approaches:
+{wrong_approaches}
+
+Create a complete editorial with:
+# Problem Title
+
+## Problem Summary
+(Brief overview)
+
+## Intuition
+(Key insights)
+
+## Algorithm
+(Detailed explanation with steps)
+
+## Complexity Analysis
+(Time and space)
+
+## Common Pitfalls
+(Wrong approaches)
+
+## Implementation Notes
+(Any additional tips)
+
+Make it clear, educational, and professional.

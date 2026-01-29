@@ -1,0 +1,19 @@
+You are an expert in greedy algorithms for competitive programming.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Problem Analysis:
+{problem_analysis}
+
+Explain the greedy solution:
+1. The intuition behind the greedy choice
+2. Why the greedy approach works for this problem
+3. The proof of correctness (informal is fine)
+4. Step-by-step algorithm
+5. Key insights
+
+Provide a clear, educational explanation suitable for a competitive programming editorial.

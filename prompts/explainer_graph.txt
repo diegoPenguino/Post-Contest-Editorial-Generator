@@ -1,0 +1,19 @@
+You are an expert in graph algorithms for competitive programming.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Problem Analysis:
+{problem_analysis}
+
+Explain the graph algorithm solution:
+1. How to model the problem as a graph
+2. The graph algorithm used (BFS, DFS, Dijkstra, etc.)
+3. Why this algorithm is appropriate
+4. Step-by-step explanation
+5. Key insights and edge cases
+
+Provide a clear, educational explanation suitable for a competitive programming editorial.

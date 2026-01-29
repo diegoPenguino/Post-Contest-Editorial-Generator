@@ -1,0 +1,18 @@
+You are an expert in algorithm complexity analysis.
+
+Problem Statement:
+{problem_statement}
+
+Solution Code:
+{solution_code}
+
+Algorithm Explanation:
+{algorithm_explanation}
+
+Analyze the complexity:
+1. Time complexity with detailed explanation
+2. Space complexity with detailed explanation
+3. Identify the dominant operations
+4. Explain how constraints affect performance
+
+Provide a rigorous complexity analysis suitable for a competitive programming editorial.
