@@ -76,7 +76,7 @@ LOG_LEVEL=INFO
 
 ## Running the demo
 
-The repository includes a simple demo. Edit `main.py` to set `SAMPLE_PROBLEM` and `SAMPLE_SOLUTION` (if desired) and run:
+The repository includes a simple demo that uses the bundled sample files in `input/` and runs:
 
 ```powershell
 python main.py
@@ -87,3 +87,35 @@ What the demo does:
 - Constructs the editorial workflow from `graphs/editorial_graph.py`
 - Runs the workflow (invokes agents in order)
 - Writes `output/editorial.md` and prints a short status message
+
+## Streamlit frontend
+
+This repository now includes a small Streamlit UI for running the generator from a browser.
+
+Run it locally:
+
+```powershell
+streamlit run streamlit_app.py
+```
+
+What the UI provides:
+- Paste or upload a problem statement
+- Paste or upload the accepted solution
+- Adjust model and temperature
+- Generate and preview the Markdown editorial
+- Download the result as `editorial.md`
+
+## Docker
+
+Build and run the container:
+
+```powershell
+docker build -t editorial-generator .
+docker run --rm -p 8501:8501 --env-file .env editorial-generator
+```
+
+Then open:
+
+```text
+http://localhost:8501
+```

@@ -1,4 +1,5 @@
 python-dotenv==1.2.1
+streamlit==1.49.1
 openai==2.16.0
 langchain==1.2.7
 langchain-core==1.2.7

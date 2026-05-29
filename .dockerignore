@@ -1,0 +1,13 @@
+.git
+.idea
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+output
+venv
+venv/
+.pytest_cache
+*.log
