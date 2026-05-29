@@ -1,6 +1,7 @@
 import streamlit as st
 
 from app_core import generate_editorial, load_default_inputs, load_environment
+from utils import create_submission_record, update_submission_record
 from utils.validations import validate_file_size, validate_text_limits
 
 
@@ -76,20 +77,56 @@ with col2:
 generate_clicked = st.button("Generate Editorial", type="primary", use_container_width=True)
 
 if generate_clicked:
-    if not problem_statement.strip():
-        st.error("Please provide a problem statement.")
-    elif not solution_code.strip():
-        st.error("Please provide a solution.")
-    else:
-        input_errors.extend(validate_text_limits(problem_statement, "Problem statement", model=model))
-        input_errors.extend(validate_text_limits(solution_code, "Accepted solution", model=model))
+    submission_id = create_submission_record(
+        problem_statement=problem_statement,
+        solution_code=solution_code,
+        model=model,
+        temperature=temperature,
+        status="received",
+        metadata={"source": "streamlit"},
+        db_path=config["db_path"],
+    )
 
-        if input_errors:
-            for error in input_errors:
+    if not problem_statement.strip():
+        error_message = "Please provide a problem statement."
+        update_submission_record(
+            submission_id,
+            status="validation_failed",
+            error_message=error_message,
+            db_path=config["db_path"],
+        )
+        st.error(error_message)
+    elif not solution_code.strip():
+        error_message = "Please provide a solution."
+        update_submission_record(
+            submission_id,
+            status="validation_failed",
+            error_message=error_message,
+            db_path=config["db_path"],
+        )
+        st.error(error_message)
+    else:
+        validation_errors = list(input_errors)
+        validation_errors.extend(validate_text_limits(problem_statement, "Problem statement", model=model))
+        validation_errors.extend(validate_text_limits(solution_code, "Accepted solution", model=model))
+
+        if validation_errors:
+            update_submission_record(
+                submission_id,
+                status="validation_failed",
+                error_message="\n".join(validation_errors),
+                db_path=config["db_path"],
+            )
+            for error in validation_errors:
                 st.error(error)
         else:
             with st.spinner("Generating editorial..."):
                 try:
+                    update_submission_record(
+                        submission_id,
+                        status="processing",
+                        db_path=config["db_path"],
+                    )
                     final_editorial = generate_editorial(
                         problem_statement=problem_statement,
                         solution_code=solution_code,
@@ -98,8 +135,20 @@ if generate_clicked:
                         save_output=False,
                     )
                 except Exception as exc:
+                    update_submission_record(
+                        submission_id,
+                        status="failed",
+                        error_message=str(exc),
+                        db_path=config["db_path"],
+                    )
                     st.error(f"Generation failed: {exc}")
                 else:
+                    update_submission_record(
+                        submission_id,
+                        status="completed",
+                        editorial_markdown=final_editorial,
+                        db_path=config["db_path"],
+                    )
                     st.success("Editorial generated successfully.")
                     st.subheader("Preview")
                     st.markdown(final_editorial)

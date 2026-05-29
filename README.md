@@ -49,6 +49,7 @@ Top-level layout (key files/folders):
 - `utils/` — helpers and constants
 - `input/` — example problem/solution used by the demo
 - `output/editorial.md` — generated editorial (demo output)
+- `data/submissions.db` — SQLite database for stored Streamlit submissions
 - `editorial_workflow.png` — diagram of the workflow
 
 ## Requirements & setup
@@ -72,6 +73,8 @@ GEMINI_API_KEY=your_api_key_here
 GEMINI_MODEL=gemini-2.0-flash
 GEMINI_TEMPERATURE=1
 LOG_LEVEL=INFO
+SUBMISSIONS_DB_PATH=data/submissions.db
+ADMIN_PASSWORD=change-me
 ```
 
 ## Running the demo
@@ -104,6 +107,19 @@ What the UI provides:
 - Adjust model and temperature
 - Generate and preview the Markdown editorial
 - Download the result as `editorial.md`
+- Log each submission to SQLite automatically
+- Review submissions from the Streamlit `Admin` page
+
+### Admin page
+
+The app includes a password-protected admin dashboard at `pages/Admin.py`.
+
+What it provides:
+- Table view of all submissions
+- Search and status filters
+- Full detail view for problem statement, solution, generated editorial, and errors
+- CSV export for offline review
+- Automatic database creation on first run at `data/submissions.db`
 
 ## Docker
 

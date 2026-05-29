@@ -5,7 +5,7 @@ from typing import Callable, Optional
 from dotenv import load_dotenv
 
 from graphs import create_editorial_graph
-from utils import save_editorial, setup_logging
+from utils import initialize_database, save_editorial, setup_logging
 
 BASE_DIR = Path(__file__).parent
 DEFAULT_PROBLEM_FILE = BASE_DIR / "input" / "problem_content.txt"
@@ -25,6 +25,7 @@ def read_text_file(path: Path) -> str:
 def load_environment() -> dict:
     """Load runtime configuration from the environment."""
     load_dotenv()
+    db_path = initialize_database()
 
     api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if not api_key:
@@ -38,6 +39,7 @@ def load_environment() -> dict:
         "model": os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite"),
         "temperature": float(os.getenv("GEMINI_TEMPERATURE", "1")),
         "log_level": os.getenv("LOG_LEVEL", "INFO"),
+        "db_path": str(db_path),
     }
 
 
