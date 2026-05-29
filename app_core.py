@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Optional
+from typing import Callable, Optional
 
 from dotenv import load_dotenv
 
@@ -26,16 +26,17 @@ def load_environment() -> dict:
     """Load runtime configuration from the environment."""
     load_dotenv()
 
-    api_key = os.getenv("OPENAI_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
     if not api_key:
         raise ValueError(
-            "OPENAI_API_KEY not found in environment. "
+            "GEMINI_API_KEY not found in environment. "
             "Please create a .env file based on .env.example"
         )
 
     return {
-        "model": os.getenv("OPENAI_MODEL", "gpt-5-nano"),
-        "temperature": float(os.getenv("OPENAI_TEMPERATURE", "1")),
+        "api_key": api_key,
+        "model": os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite"),
+        "temperature": float(os.getenv("GEMINI_TEMPERATURE", "1")),
         "log_level": os.getenv("LOG_LEVEL", "INFO"),
     }
 
@@ -54,6 +55,7 @@ def generate_editorial(
     temperature: Optional[float] = None,
     log_level: Optional[str] = None,
     save_output: bool = True,
+    progress_callback: Optional[Callable[[str], None]] = None,
 ) -> str:
     """Run the editorial workflow and return the final Markdown editorial."""
     config = load_environment()
@@ -70,6 +72,8 @@ def generate_editorial(
         "solution_code": solution_code,
         "model": model,
         "temperature": temperature,
+        "api_key": config["api_key"],
+        "progress_callback": progress_callback,
     }
 
     result = app.invoke(initial_state)

@@ -38,7 +38,7 @@ def main():
 
     except ValueError as e:
         print(f"Configuration Error: {e}")
-        print("Please ensure you have created a .env file with your OPENAI_API_KEY")
+        print("Please ensure you have created a .env file with your GEMINI_API_KEY")
         return 1
 
     except Exception as e:

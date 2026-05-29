@@ -1,4 +1,4 @@
-DEFAULT_MODEL = "gpt-5-nano"
+DEFAULT_MODEL = "gemini-3.1-flash-lite"
 DEFAULT_TEMPERATURE = 1
 
 # Constants for state keys

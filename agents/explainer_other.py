@@ -1,8 +1,8 @@
 import logging
 from typing import Dict, Any
-from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from utils import load_prompt_template
+from utils.llm import create_llm, log_llm_response, report_progress
 from utils.constants import *
 
 logger = logging.getLogger(__name__)
@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 def explainer_other_node(state: Dict[str, Any]) -> Dict[str, Any]:
     logger.info("Generating algorithm explanation for other algorithms...")
+    report_progress(state, "Phase: Explaining the solution approach")
 
     problem_statement = state.get(PROBLEM_STATEMENT, "")
     solution_code = state.get(SOLUTION_CODE, "")
@@ -21,14 +22,22 @@ def explainer_other_node(state: Dict[str, Any]) -> Dict[str, Any]:
         solution_code=solution_code,
         problem_analysis=problem_analysis,
     )
+    logger.info(
+        "Other explainer prompt prepared: chars=%d model=%s temperature=%s",
+        len(prompt),
+        state.get(MODEL, DEFAULT_MODEL),
+        state.get(TEMPERATURE, DEFAULT_TEMPERATURE),
+    )
 
-    llm = ChatOpenAI(
-        model=state.get(MODEL, DEFAULT_MODEL), temperature=state.get(TEMPERATURE, DEFAULT_TEMPERATURE)
+    llm = create_llm(
+        model=state.get(MODEL, DEFAULT_MODEL),
+        temperature=state.get(TEMPERATURE, DEFAULT_TEMPERATURE),
+        api_key=state.get("api_key"),
     )
 
     messages = [HumanMessage(content=prompt)]
     response = llm.invoke(messages)
-    explanation = response.content
+    explanation = log_llm_response("explainer_other_node", response)
 
     logger.info("Other algorithm explanation completed")
 
